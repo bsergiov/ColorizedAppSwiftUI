@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var colorScreen: Color = .gray
+    
     @State private var redValue = Double.random(in: 0...255)
     @State private var greenValue = Double.random(in: 0...255)
     @State private var blueValue = Double.random(in: 0...255)

@@ -25,25 +25,22 @@ struct ColorControl: View {
                     print("tut \(colorValue)")
                     tfColorValue = "\(colorValue)"
                 })
-            
-            TextField("\(colorValue, specifier: "%.0f")", text: $tfColorValue)
-                .frame(width: 55)
-                .background(.white)
-
-                .cornerRadius(5)
-                
-                .keyboardType(.numberPad)
-                .onSubmit {
-                    if let colorValue = Double(tfColorValue) {
-                        self.colorValue = colorValue
+                TextField("\(colorValue, specifier: "%.0f")", text: $tfColorValue)
+                    .frame(width: 55)
+                    .background(.white)
+                    .cornerRadius(5)
+                    .keyboardType(.numberPad)
+                    .onSubmit {
+                        if let colorValue = Double(tfColorValue), colorValue <= 255 {
+                            self.colorValue = colorValue
+                            tfColorValue = ""
+                            return
+                        }
+                        alertPresented.toggle()
                         tfColorValue = ""
-                        return
                     }
-                    alertPresented.toggle()
-                    tfColorValue = ""
-                }
-                
-                .navigationTitle(Text("\(colorValue)"))
+                    
+                    .navigationTitle(Text("\(colorValue)"))
             
         }.padding().alert("Wrong Format", isPresented: $alertPresented, actions: {}, message: {})
     }
